@@ -31,7 +31,7 @@ public class Main {
 				String body = sc.nextLine();
 				System.out.printf(i + "글이 생성되었습니다.\n");
 				i++;
-//,ㅡ,ㅡㅣ.[ㅣ.[.
+//,ㅡ,ㅡㅣ.[ㅣ.[.;ㅣ.,ㅣ,,
 			} else {
 				System.out.println("존재하지않는 명령어입니다.");
 			}
