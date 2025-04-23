@@ -24,9 +24,29 @@ public class Main {
    	System.out.println("A반 학생의 총 점수 : " + sum);
    	
    	ave = (double) sum / scores.length; // sum은 int이기 때문에 double로 형변환 해줘야함
-   	System.out.printf("A반 학생의 총 평균 : %5.2f " ,ave);
+   	System.out.printf("A반 학생의 총 평균 : %5.2f \n" ,ave);
    	sc.close();
-   	   		
+   	
+   	String grede;
+   	
+   	switch (sum/10) {
+	case 10 : case 9 :
+		grede= "A";
+		break;
+	case 8 : 
+		grede= "B";
+		break;
+	case 7 : 
+		grede = "c";
+		break;
+	case 6 : 
+		grede = "D";
+		break;
+	default:
+		grede = "F";
+		break;
+	}
+   	System.out.println("학생의 등급 : " + grede);
    	
    }
 }

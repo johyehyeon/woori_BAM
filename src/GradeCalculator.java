@@ -12,7 +12,7 @@ public class GradeCalculator {
         double ave = 0.0;
         System.out.println("총학생수 : " + student);
         
-        for (int i ; i < )
+        
         
        
     }
