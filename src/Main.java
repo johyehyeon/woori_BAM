@@ -24,6 +24,7 @@ public class Main {
    	System.out.println("A반 학생의 총 점수 : " + sum);
    	
    	ave = (double) sum / scores.length; // sum은 int이기 때문에 double로 형변환 해줘야함
+<<<<<<< HEAD
    	System.out.printf("A반 학생의 총 평균 : %5.2f \n" ,ave);
    	sc.close();
    	
@@ -47,6 +48,11 @@ public class Main {
 		break;
 	}
    	System.out.println("학생의 등급 : " + grede);
+=======
+   	System.out.printf("A반 학생의 총 평균 : %5.2f " ,ave);
+   	sc.close();
+   	   		
+>>>>>>> 0435b69671668d7bc37be2c38a4d17c02e5d05d5
    	
    }
 }
