@@ -1,36 +1,50 @@
 import java.util.Scanner;
 
 public class Aaa {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 
-	public static void main(String[] args) {
-		int sum;
-		double ave;
-		int[] A = new int[5] ;
-		System.out.println("아래에 5명의 영어 점수를 입력하세요");
-		
-		Scanner a = new Scanner(System.in);
-		Scanner b = new Scanner(System.in);
-		Scanner c = new Scanner(System.in);
-		Scanner d = new Scanner(System.in);
-		Scanner e = new Scanner(System.in);
-		double A1 = a.nextInt();
-		
-		for(int i = 1 ; i <= 5 ; i++ ) {
-		    
-		    
-		}
+        System.out.print("학생 수를 입력하세요: ");
+        int count = sc.nextInt();
 
-		
-		sum=(int)(A+B+C+D+E);
-		ave=((A+B+C+D+E)/5);
+        int[] scores = new int[count];
+        int sum = 0;
 
-		System.out.println("영어총점 : " + sum );
-		System.out.println("영어평균 : " + ave );
-		
-		
-		
-		
+        // 점수 입력 + 유효성 검사
+        for (int i = 0; i < count; i++) {
+            System.out.printf("%d번 학생 점수: ", i + 1);
+            int score = sc.nextInt();
+            scores[i] = score;
+            sum += score;
+        }
 
-	}
+        double avg = (double) sum / count;
+        int avgDiv = (int) avg / 10;
 
+        char grade;
+
+        switch (avgDiv) {
+            case 10: // 100점
+            case 9:
+                grade = 'A';
+                break;
+            case 8:
+                grade = 'B';
+                break;
+            case 7:
+                grade = 'C';
+                break;
+            case 6:
+                grade = 'D';
+                break;
+            default:
+                grade = 'F';
+        }
+
+        System.out.println("\n총점: " + sum);
+        System.out.printf("평균: %.2f\n", avg);
+        System.out.println("등급: " + grade);
+
+        sc.close();
+    }
 }
