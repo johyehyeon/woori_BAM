@@ -111,6 +111,75 @@ public class Main {
 				System.out.println("제목 : " + foundAticle.title);
 				System.out.println("내용 : " + foundAticle.body);
 
+			} else if (cmd.startsWith("article delete")) {
+				String[] cmdBits2 = cmd.split(" ");
+
+				Article foundAticle2 = null;
+
+				int id2 = 0;
+				try {
+					id2 = Integer.parseInt(cmdBits2[2]);
+				} catch (NumberFormatException e) {
+					System.out.println("번호에 글자가 입력되어 실행되지 않습니다.");
+					continue;
+				}
+
+				for (Article A : articles) {
+				// 향상된 for문 인덱스 사용 x , 일반 for문 사용	
+					if (A.id == id2) {
+						foundAticle2 = A;
+						break;
+					}
+				}
+
+				if (foundAticle2 == null) {
+					System.out.println(id2 + "번 게시물이 존재하지 않습니다.");
+					continue;
+				}
+				
+				articles.remove(foundAticle2);
+				// remove에서 오브젝트를 삭제함 id2를 삭제했으면 인덱스가 삭제되어 뒤에 자료들이 땡겨져서 오류가 발생할 수 있음
+                // 객체에서 삭제하기 때문에 articles로 객체에서 찾아서 삭제한다.
+				
+				System.out.println(foundAticle2.id + "번 게시글이 삭제되었습니다.");
+			
+				
+
+			} else if(cmd.startsWith("article modify")){
+				String[] cmdBits3 = cmd.split(" ");
+
+				Article foundAticle3 = null;
+
+				int id3 = 0;
+				try {
+					id3 = Integer.parseInt(cmdBits3[2]);
+				} catch (NumberFormatException e) {
+					System.out.println("번호에 글자가 입력되어 실행되지 않습니다.");
+					continue;
+				}
+
+				for (Article A : articles) {
+					if (A.id == id3) {
+						foundAticle3 = A;
+						break;
+					}
+				}
+
+				if (foundAticle3 == null) {
+					System.out.println(id3 + "번 게시물이 존재하지 않습니다.");
+					continue;
+				}
+				
+				System.out.printf("제목 : ");
+				String title = sc.nextLine().trim();
+				System.out.printf("내용 : ");
+				String body = sc.nextLine().trim();
+				
+				foundAticle3.title = title;
+				foundAticle3.body = body;
+				// 내용의 수정이기에 foundAticle3에서 입력된 타이틀을 넣어 내용을 바꿔줌
+				System.out.println(foundAticle3.id + "번 게시글이 수정되었습니다.");
+			
 			} else {
 				System.out.println("존재하지 않는 명령어 입니다.");
 			}
