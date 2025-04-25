@@ -116,6 +116,8 @@ public class Main {
 
 				Article foundAticle2 = null;
 
+				
+				// index삭제로 할경우 
 				int id2 = 0;
 				try {
 					id2 = Integer.parseInt(cmdBits2[2]);
@@ -123,23 +125,36 @@ public class Main {
 					System.out.println("번호에 글자가 입력되어 실행되지 않습니다.");
 					continue;
 				}
-
-				for (Article A : articles) {
+				
+				int foundIndex = -1; //int는 0이 초기값인데 -1 이면 null과 같은 개념 계속 ++하면서
+				int indexId = 0; // 단순 인덱스를 계산하는 변수
+				
 				// 향상된 for문 인덱스 사용 x , 일반 for문 사용	
+				for (Article A : articles) {
 					if (A.id == id2) {
 						foundAticle2 = A;
+						foundIndex = indexId;
 						break;
 					}
+					indexId++;	// 향상된for문 인덱스찾기
 				}
+
+//일반for문			for (int i = 0; i < articles.size(); i++) {
+//					Article article = articles.get(i);
+//					if (article.id == id2) {
+//						break;
+//					}
+//				} //일반 for문을 쓰면 인덱스를 찾기 쉬움
 
 				if (foundAticle2 == null) {
 					System.out.println(id2 + "번 게시물이 존재하지 않습니다.");
 					continue;
 				}
-				
-				articles.remove(foundAticle2);
+//일반 for문    articles.remove(id2);
+		//		articles.remove(foundAticle2);
 				// remove에서 오브젝트를 삭제함 id2를 삭제했으면 인덱스가 삭제되어 뒤에 자료들이 땡겨져서 오류가 발생할 수 있음
                 // 객체에서 삭제하기 때문에 articles로 객체에서 찾아서 삭제한다.
+				articles.remove(foundIndex);
 				
 				System.out.println(foundAticle2.id + "번 게시글이 삭제되었습니다.");
 			
