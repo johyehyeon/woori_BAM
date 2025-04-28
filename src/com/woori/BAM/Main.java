@@ -46,11 +46,11 @@ public class Main {
 					continue; // while문 처음으로 돌아감.
 				}
 
-				System.out.println("번호 | 제목");
+				System.out.println("번호 | 제목 : 내용");
 
 				for (int i = articles.size() - 1; i >= 0; i--) { // 역순으로 출력하기
 					Article article = articles.get(i); // get으로 가져와서
-					System.out.printf("%d    | %s \n", article.id, article.title); // 출력
+					System.out.printf("%d    | %s : %s \n", article.id, article.title, article.body); // 출력
 				}
 			} else if (cmd.startsWith("article detail")) { // 입력값이 ""로 시작하면
 				// startsWith() / 문자가 시작하는 것을 확인해서 비교 참or거짓
@@ -112,7 +112,7 @@ public class Main {
 				System.out.println("내용 : " + foundAticle.body);
 
 			} else if (cmd.startsWith("article delete")) {
-				String[] cmdBits2 = cmd.split(" ");
+				String[] cmdBits = cmd.split(" ");
 
 				Article foundAticle2 = null;
 
@@ -120,10 +120,11 @@ public class Main {
 				// index삭제로 할경우 
 				int id2 = 0;
 				try {
-					id2 = Integer.parseInt(cmdBits2[2]);
+					id2 = Integer.parseInt(cmdBits[2]);
 				} catch (NumberFormatException e) {
 					System.out.println("번호에 글자가 입력되어 실행되지 않습니다.");
 					continue;
+				} catch (Exception e) { 
 				}
 				
 				int foundIndex = -1; //int는 0이 초기값인데 -1 이면 null과 같은 개념 계속 ++하면서
@@ -161,16 +162,18 @@ public class Main {
 				
 
 			} else if(cmd.startsWith("article modify")){
-				String[] cmdBits3 = cmd.split(" ");
-
-				Article foundAticle3 = null;
-
+				String[] cmdBits = cmd.split(" "); 
+				Article foundAticle3 = null; 
+				
 				int id3 = 0;
-				try {
-					id3 = Integer.parseInt(cmdBits3[2]);
+
+				try { 
+					id3 = Integer.parseInt(cmdBits[2]);
 				} catch (NumberFormatException e) {
 					System.out.println("번호에 글자가 입력되어 실행되지 않습니다.");
 					continue;
+				} catch (Exception e) { 
+
 				}
 
 				for (Article A : articles) {
@@ -185,14 +188,15 @@ public class Main {
 					continue;
 				}
 				
-				System.out.printf("제목 : ");
+				System.out.printf("수정할 제목 : ");
 				String title = sc.nextLine().trim();
-				System.out.printf("내용 : ");
+				System.out.printf("수정할 내용 : ");
 				String body = sc.nextLine().trim();
 				
 				foundAticle3.title = title;
 				foundAticle3.body = body;
-				// 내용의 수정이기에 foundAticle3에서 입력된 타이틀을 넣어 내용을 바꿔줌
+				// 객체에 대한 주소값을 다시 넣어주는 과정..
+				
 				System.out.println(foundAticle3.id + "번 게시글이 수정되었습니다.");
 			
 			} else {
