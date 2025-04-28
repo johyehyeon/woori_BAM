@@ -24,15 +24,29 @@ public class Main {
 				System.out.println("명령어를 입력해주세요.");
 				continue;
 			}
-
+//		//  LocalDate now = LocalDate.now(); //날짜구하는 방법
+//			LocalDateTime nowtime = LocalDateTime.now(); //날짜와 시간을 구하는 방법
+//			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss");
+//			// 시간 hh로 하면 12시간별로, HH로 하면 24시간 기준으로 나온다.
+//			// 날짜와 시간의 형식을 정하는 방법
+//			String formatedNow = nowtime.format(formatter);
+//			// 지금의 날짜와 시간의 형식을 정해진대로 넣고 formatedNow에 넣는다
+// 전부 Util 클레스로 넣어서 주석처리
+			
+			
+			
 			if (cmd.equals("article write")) {
 
 				System.out.printf("제목 : ");
 				String title = sc.nextLine().trim();
 				System.out.printf("내용 : ");
 				String body = sc.nextLine().trim();
-
-				Article article = new Article(listArticleId, title, body);
+			    System.out.println("날짜 : " + Util.getDateStr());
+			    // 바로 Util.getDateStr() 넣어도 실행된다.. 스태틱메서드
+				String day = Util.getDateStr();
+				//day에 현재날짜넣기
+				
+				Article article = new Article(listArticleId, title, body, day);
 				articles.add(article);
 
 				System.out.printf(listArticleId + "글이 생성되었습니다.\n");
@@ -46,11 +60,11 @@ public class Main {
 					continue; // while문 처음으로 돌아감.
 				}
 
-				System.out.println("번호 | 제목 : 내용");
+				System.out.println("번호 | 제목 : 내용 (시간)");
 
 				for (int i = articles.size() - 1; i >= 0; i--) { // 역순으로 출력하기
 					Article article = articles.get(i); // get으로 가져와서
-					System.out.printf("%d    | %s : %s \n", article.id, article.title, article.body); // 출력
+					System.out.printf("%d    | %s : %s (%s)\n", article.id, article.title, article.body, article.day); // 출력
 				}
 			} else if (cmd.startsWith("article detail")) { // 입력값이 ""로 시작하면
 				// startsWith() / 문자가 시작하는 것을 확인해서 비교 참or거짓
@@ -107,7 +121,7 @@ public class Main {
 					// 아래에서 nullpointexception이 발생이 안되도록 조치
 				}
 				System.out.println("번호 : " + foundAticle.id);
-				System.out.println("날짜 : yyyy.mm.dd");
+				System.out.println("날짜 : " + foundAticle.day);
 				System.out.println("제목 : " + foundAticle.title);
 				System.out.println("내용 : " + foundAticle.body);
 
@@ -192,9 +206,11 @@ public class Main {
 				String title = sc.nextLine().trim();
 				System.out.printf("수정할 내용 : ");
 				String body = sc.nextLine().trim();
+				String day = Util.getDateStr();
 				
 				foundAticle3.title = title;
 				foundAticle3.body = body;
+				foundAticle3.day = day;
 				// 객체에 대한 주소값을 다시 넣어주는 과정..
 				
 				System.out.println(foundAticle3.id + "번 게시글이 수정되었습니다.");
@@ -212,12 +228,16 @@ class Article {
 	int id;
 	String title;
 	String body;
+	String day;
 
-	public Article(int id, String title, String body) {
+	public Article(int id, String title, String body, String day) {
 		// 생성자를 이용해서 초기화하여 변수넣기
 		this.id = id;
 		this.title = title;
 		this.body = body;
+		this.day = day;
 	}
 
-}
+
+
+	}

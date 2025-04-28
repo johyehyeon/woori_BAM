@@ -1,5 +1,7 @@
 package com.woori.BAM;
 
+import java.util.Scanner;
+
 public class Main2 {
 	public static void main(String[] args) {
 		
@@ -21,7 +23,7 @@ public class Main2 {
 	
 	
 	}
-}
+
 
 //클래스에 변수선언하면 전역변수
 public static void main(String[] args) {
@@ -59,4 +61,4 @@ sc.close();
 // 이런 쓰레기메모리를 정리하는것이 있는데 G.C(garbage collector)를 사용하면 되므로 꼭 안해도 되는 명령이다
 }
 
-
+}
