@@ -12,7 +12,14 @@ public class Main {
 		int listArticleId = 1;
 		List<Article> articles = new ArrayList<Article>();
 		int viewCount = 0;
-
+	
+		
+		for (int i = 1 ; i<=3 ; i++ ) {
+			Article article = new Article(listArticleId ,"제목"+ i ,"내용" + i , Util.getDateStr(), i*10);
+			articles.add(article);
+			listArticleId = listArticleId + 1 ;
+		}
+		
 		while (true) {
 
 			System.out.printf("명령어) ");
@@ -36,7 +43,6 @@ public class Main {
 				// 바로 Util.getDateStr() 넣어도 실행된다.. 스태틱메서드
 				String day = Util.getDateStr();
 				// day에 현재날짜넣기
-
 				Article article = new Article(listArticleId, title, body, day, viewCount);
 				articles.add(article);
 
@@ -51,11 +57,11 @@ public class Main {
 					continue; // while문 처음으로 돌아감.
 				}
 
-				System.out.println("번호 | 제목 : 내용      (시간)      | 조회수 ");
+				System.out.println("번호 |  제목   : 내용       (시간)       | 조회수 ");
 
 				for (int i = articles.size() - 1; i >= 0; i--) { // 역순으로 출력하기
 					Article article = articles.get(i); // get으로 가져와서
-					System.out.printf("%d    | %s : %s (%s) | %d \n", article.id, article.title, article.body,
+					System.out.printf("%d  | %s  : %s  (%s) | %d \n", article.id, article.title, article.body,
 							article.day, article.viewCount); // 출력
 				}
 
@@ -194,5 +200,10 @@ class Article {
 		this.body = body;
 		this.day = day;
 		this.viewCount = viewCount;
+	}
+
+	public void add(int i, String string, String string2, String dateStr, int j) {
+		// TODO Auto-generated method stub
+		
 	}
 }
