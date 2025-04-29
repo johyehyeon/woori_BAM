@@ -6,28 +6,52 @@ import java.util.Scanner;
 
 public class Main {
 
+// 테스트 데이터입력2를 위한 전역변수 	
+	// 전역변수 위치에 있어야 static 메서드를 만들수 있고, static 메서드에서 사용할 수 있다..
+	static int listArticleId = 1;
+	static List<Article> articles = new ArrayList<Article>();
+	// 전역변수는 선언초기화를 안하면 기본값을 가진다 하여 초기화를 하든말든 선택
+	// 지역변수는 선언하면서 동시에 초기화를 해줘야한다. 기억할것
+
 	public static void main(String[] args) {
+
 		System.out.println("== 프로그램 시작 ==");
 		Scanner sc = new Scanner(System.in);
-		int listArticleId = 1;
-		List<Article> articles = new ArrayList<Article>();
+
+//		static int listArticleId = 1;
+//		static List<Article> articles = new ArrayList<Article>();
+		// static을 붙인 이유 : 메소드를 만들어서 쓸라면 static을 붙여야 사용될수있다.
+		// 하지만 static을 붙여도 각 지열의 로컬에서 쓰이기때문에 오류남 -> 로컬에서 벗어나서 메인에 선언되어야한다..
+
 		int viewCount = 0;
-	
-		
-		for (int i = 1 ; i<=3 ; i++ ) {
-			Article article = new Article(listArticleId ,"제목"+ i ,"내용" + i , Util.getDateStr(), i*10);
-			articles.add(article);
-			listArticleId = listArticleId + 1 ;
-		}
-		
+
+		// 프로그램 시작됐을때 테스트데이터 생성하기
+//테스트 데이터 입력2
+		makeTestData(); // 스테틱 메서드 만들기 (해당메서드가 만들어지는 위치는 메인메서트 밖)
+		// static메서드일수밖에 없는 이유를 설명할 줄 알아야함
+		// 스태틱메서드 <> 인스턴스 메서드 차이점 생각해볼것
+
+//테스트 데이터 입력1
+		// for (int i = 1 ; i<=3 ; i++ ) { // 순차적으로 반복해서 수가 늘어나기 때문에 for문 사용
+//			articles.add(new Article(listArticleId++ ,"제목"+ i ,"내용" + i , Util.getDateStr(), i*10));
+////			Article article = new Article(listArticleId ,"제목"+ i ,"내용" + i , Util.getDateStr(), i*10);
+////			// 생성자로 해서 내용을 입력하게
+////			articles.add(article);
+////			listArticleId++ ; // 정보를 배열에 저장 후 +1 -> 윗줄에 추가해서 입력할수있음
+//		}
+
+//         Article ar = new Article(listArticleId++,Util.getDateStr(),"제목1","내용1" ,10);
+//         articles.add(ar);
 		while (true) {
 
 			System.out.printf("명령어) ");
 			String cmd = sc.nextLine().trim();
+			// trim() 앞뒤공백을 없애는 명령어
 
 			if (cmd.equals("exit")) {
-				break;
+				break; // exit를 누르면 while 반복문을 나간다
 			}
+
 			if (cmd.length() == 0) {
 				System.out.println("명령어를 입력해주세요.");
 				continue;
@@ -70,7 +94,7 @@ public class Main {
 				// split(",") ,로 문자열을 쪼개는 메소드
 				String[] cmdBits = cmd.split(" "); // cmd의 문자열을 공백을 기준으로 쪼갠다.(복수의 문자열로 나온다)
 
-				Article foundAticle = null; // 방법2 객체
+				Article foundArticle = null; // 방법2 객체
 				int id = 0;
 
 				try { // 예외처리 : 오류가 발생하면 비정상 종료가 안되게끔
@@ -78,34 +102,33 @@ public class Main {
 				} catch (NumberFormatException e) {
 					System.out.println("번호에 글자가 입력되어 실행되지 않습니다.");
 					continue;
-				} catch (Exception e) { //
-
+				} catch (Exception e) {
 				}
 				for (Article A : articles) { // articles 안에 있는 모든정보가 i으로 넘겨받는다
 					if (A.id == id) {
 
-						foundAticle = A;
+						foundArticle = A;
 						break;
 					}
 
 				}
-				if (foundAticle == null) {
+				if (foundArticle == null) {
 					System.out.println(id + "번 게시물이 존재하지 않습니다.");
 					continue;
 				}
-				foundAticle.viewCount++;
+				foundArticle.viewCount++;
 				// 객체에 +1 넣어줌
 
-				System.out.println("번호 : " + foundAticle.id);
-				System.out.println("날짜 : " + foundAticle.day);
-				System.out.println("제목 : " + foundAticle.title);
-				System.out.println("내용 : " + foundAticle.body);
-				System.out.println("조회수 : " + foundAticle.viewCount);
+				System.out.println("번호 : " + foundArticle.id);
+				System.out.println("날짜 : " + foundArticle.day);
+				System.out.println("제목 : " + foundArticle.title);
+				System.out.println("내용 : " + foundArticle.body);
+				System.out.println("조회수 : " + foundArticle.viewCount);
 
 			} else if (cmd.startsWith("article delete")) {
 				String[] cmdBits = cmd.split(" ");
 
-				Article foundAticle2 = null;
+				Article foundArticle2 = null;
 
 				int id2 = 0;
 				try {
@@ -122,24 +145,24 @@ public class Main {
 				// 향상된 for문 인덱스 사용 x , 일반 for문 사용
 				for (Article A : articles) {
 					if (A.id == id2) {
-						foundAticle2 = A;
+						foundArticle2 = A;
 						foundIndex = indexId;
 						break;
 					}
 					indexId++; // 향상된for문 인덱스찾기
 				}
 
-				if (foundAticle2 == null) {
+				if (foundArticle2 == null) {
 					System.out.println(id2 + "번 게시물이 존재하지 않습니다.");
 					continue;
 				}
 				articles.remove(foundIndex);
 
-				System.out.println(foundAticle2.id + "번 게시글이 삭제되었습니다.");
+				System.out.println(foundArticle2.id + "번 게시글이 삭제되었습니다.");
 
 			} else if (cmd.startsWith("article modify")) {
 				String[] cmdBits = cmd.split(" ");
-				Article foundAticle3 = null;
+				Article foundArticle3 = null;
 
 				int id3 = 0;
 
@@ -154,12 +177,12 @@ public class Main {
 
 				for (Article A : articles) {
 					if (A.id == id3) {
-						foundAticle3 = A;
+						foundArticle3 = A;
 						break;
 					}
 				}
 
-				if (foundAticle3 == null) {
+				if (foundArticle3 == null) {
 					System.out.println(id3 + "번 게시물이 존재하지 않습니다.");
 					continue;
 				}
@@ -170,19 +193,28 @@ public class Main {
 				String body = sc.nextLine().trim();
 				String day = Util.getDateStr();
 
-				foundAticle3.title = title;
-				foundAticle3.body = body;
-				foundAticle3.day = day;
+				foundArticle3.title = title;
+				foundArticle3.body = body;
+				foundArticle3.day = day;
 				// 객체에 대한 주소값을 다시 넣어주는 과정..
 
-				System.out.println(foundAticle3.id + "번 게시글이 수정되었습니다.");
+				System.out.println(foundArticle3.id + "번 게시글이 수정되었습니다.");
 
 			} else {
 				System.out.println("존재하지 않는 명령어 입니다.");
 			}
+
+			System.out.println("== 프로그램 종료 ==");
+			sc.close();
 		}
-		System.out.println("== 프로그램 종료 ==");
-		sc.close();
+
+	}
+
+	// 테스트 데이터입력2 를 위한 static 메서드
+	private static void makeTestData() { // 메서드 만들기 메인 메서드 맨 끝에 만들어진다.
+		for (int i = 1; i <= 3; i++) { // 순차적으로 반복해서 수가 늘어나기 때문에 for문 사용
+			articles.add(new Article(listArticleId++, "제목" + i, "내용" + i, Util.getDateStr(), i * 10));
+		}
 	}
 }
 
@@ -202,8 +234,4 @@ class Article {
 		this.viewCount = viewCount;
 	}
 
-	public void add(int i, String string, String string2, String dateStr, int j) {
-		// TODO Auto-generated method stub
-		
-	}
 }
