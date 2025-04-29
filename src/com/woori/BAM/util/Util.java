@@ -1,10 +1,11 @@
-package com.woori.BAM;
+package com.woori.BAM.util;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Util {
-
+// 시간을 가져오는 유틸
+	// public 이 있어야 메인 클레스에서 import 할 수 있다.
 		
 		public static String getDateStr() {
 		//  LocalDate now = LocalDate.now(); //날짜구하는 방법

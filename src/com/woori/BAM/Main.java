@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.woori.BAM.dto.Article;
+import com.woori.BAM.util.Util;
+
 public class Main {
 
 // 테스트 데이터입력2를 위한 전역변수 	
@@ -85,8 +88,8 @@ public class Main {
 
 				for (int i = articles.size() - 1; i >= 0; i--) { // 역순으로 출력하기
 					Article article = articles.get(i); // get으로 가져와서
-					System.out.printf("%d  | %s  : %s  (%s) | %d \n", article.id, article.title, article.body,
-							article.day, article.viewCount); // 출력
+					System.out.printf("%d  | %s  : %s  (%s) | %d \n", article.getId(), article.getTitle(),
+							article.getBody(), article.getDay(), article.getViewCount()); // 출력
 				}
 
 			} else if (cmd.startsWith("article detail")) { // 입력값이 ""로 시작하면
@@ -105,7 +108,7 @@ public class Main {
 				} catch (Exception e) {
 				}
 				for (Article A : articles) { // articles 안에 있는 모든정보가 i으로 넘겨받는다
-					if (A.id == id) {
+					if (A.getId() == id) {
 
 						foundArticle = A;
 						break;
@@ -116,14 +119,14 @@ public class Main {
 					System.out.println(id + "번 게시물이 존재하지 않습니다.");
 					continue;
 				}
-				foundArticle.viewCount++;
+				foundArticle.setViewCount(foundArticle.getViewCount() + 1);
 				// 객체에 +1 넣어줌
 
-				System.out.println("번호 : " + foundArticle.id);
-				System.out.println("날짜 : " + foundArticle.day);
-				System.out.println("제목 : " + foundArticle.title);
-				System.out.println("내용 : " + foundArticle.body);
-				System.out.println("조회수 : " + foundArticle.viewCount);
+				System.out.println("번호 : " + foundArticle.getId());
+				System.out.println("날짜 : " + foundArticle.getDay());
+				System.out.println("제목 : " + foundArticle.getTitle());
+				System.out.println("내용 : " + foundArticle.getBody());
+				System.out.println("조회수 : " + foundArticle.getViewCount());
 
 			} else if (cmd.startsWith("article delete")) {
 				String[] cmdBits = cmd.split(" ");
@@ -144,7 +147,7 @@ public class Main {
 
 				// 향상된 for문 인덱스 사용 x , 일반 for문 사용
 				for (Article A : articles) {
-					if (A.id == id2) {
+					if (A.getId() == id2) {
 						foundArticle2 = A;
 						foundIndex = indexId;
 						break;
@@ -158,7 +161,7 @@ public class Main {
 				}
 				articles.remove(foundIndex);
 
-				System.out.println(foundArticle2.id + "번 게시글이 삭제되었습니다.");
+				System.out.println(foundArticle2.getId() + "번 게시글이 삭제되었습니다.");
 
 			} else if (cmd.startsWith("article modify")) {
 				String[] cmdBits = cmd.split(" ");
@@ -176,7 +179,7 @@ public class Main {
 				}
 
 				for (Article A : articles) {
-					if (A.id == id3) {
+					if (A.getId() == id3) {
 						foundArticle3 = A;
 						break;
 					}
@@ -193,21 +196,21 @@ public class Main {
 				String body = sc.nextLine().trim();
 				String day = Util.getDateStr();
 
-				foundArticle3.title = title;
-				foundArticle3.body = body;
-				foundArticle3.day = day;
+				foundArticle3.setTitle(title);
+				foundArticle3.setBody(body);
+				foundArticle3.setDay(day);
 				// 객체에 대한 주소값을 다시 넣어주는 과정..
 
-				System.out.println(foundArticle3.id + "번 게시글이 수정되었습니다.");
+				System.out.println(foundArticle3.getId() + "번 게시글이 수정되었습니다.");
 
 			} else {
 				System.out.println("존재하지 않는 명령어 입니다.");
 			}
-
-			System.out.println("== 프로그램 종료 ==");
-			sc.close();
+			
 		}
-
+		System.out.println("== 프로그램 종료 ==");
+		
+		sc.close();
 	}
 
 	// 테스트 데이터입력2 를 위한 static 메서드
@@ -216,22 +219,4 @@ public class Main {
 			articles.add(new Article(listArticleId++, "제목" + i, "내용" + i, Util.getDateStr(), i * 10));
 		}
 	}
-}
-
-class Article {
-	int id;
-	String title;
-	String body;
-	String day;
-	int viewCount;
-
-	public Article(int id, String title, String body, String day, int viewCount) {
-		// 생성자를 이용해서 초기화하여 변수넣기
-		this.id = id;
-		this.title = title;
-		this.body = body;
-		this.day = day;
-		this.viewCount = viewCount;
-	}
-
 }
