@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import com.woori.BAM.dto.Article;
 import com.woori.BAM.util.Util;
-
+// 검색, 페이지, 로그인기능 추후에 추가 할 것
 public class App {
 
 //	// 테스트 데이터입력2를 위한 전역변수 	
@@ -15,13 +15,16 @@ public class App {
 //		static List<Article> articles;
 //		// 전역변수는 선언초기화를 안하면 기본값을 가진다 하여 초기화를 하든말든 선택
 //		// 지역변수는 선언하면서 동시에 초기화를 해줘야한다. 기억할것
+
 	int listArticleId;
-	List<Article> articles;
+	List<Article> articles; // List 타입의 articles(변수)
+
 	// Main클래스에 있을때는 static main 메서드 밖으로 선언되어 전역변수로 만들었지만 지금 run메소드로 바뀌면서 전부 전역으로 바뀌어서 static변수로 선언 할 이유가
 	// 없어짐
 
-	App() {
-		articles = new ArrayList<>();
+	//static으로 초기화 했던것을 생성자(App())를 통해서 초기화를 했음
+	App() { 
+		articles = new ArrayList<>(); //articles는 데이터구조 ArrayList 형태의 객체가 생성
 		listArticleId = 1;
 	}
 
