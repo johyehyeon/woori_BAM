@@ -22,16 +22,20 @@ import java.net.Socket;
              // 데이터 수신
              BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
              String clientMessage = in.readLine();
+             // 한문장, 한라인단위로 읽는 메소드
              System.out.println("클라이언트로부터 수신: " + clientMessage);
  
-             // 데이터 송신
+             // 데이터 송신 
+             // 외우기
              PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
              out.println("접속 감사합니다.");
  
              clientSocket.close();
              System.out.println("서버 종료");
          } catch (IOException e) {
+        	 // 방화벽이든 예상치못한 예외상황 발생시
              e.printStackTrace();
+             // 로그를 처리해라  
          }
      }
  }
