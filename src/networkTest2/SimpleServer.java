@@ -24,7 +24,7 @@ public class SimpleServer {
 			BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 			//getInputStream()-> 클라이언트가 보낸 바이트 데이터를 가져옴
 			//InputStreamReader() 가져온 바이트 언어를 스트림으로 변환
-			// BufferedReader() = 문자스트림은 버퍼링해서 읽을수 있도록 도와주는 클래스 .readLine메서드를 사용
+			// BufferedReader() = 문자스트림을 읽을수 있도록 도와주는 클래스 .readLine메서드를 사용
 			String clientMessage = in.readLine();
 			// readLine() 한줄단위로 읽는 메서드 clientMessage 변수에 메세지 담기
 			System.out.println("클라이언트로부터 수신 '" + clientMessage + "'");
